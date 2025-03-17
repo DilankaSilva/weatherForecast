@@ -1,4 +1,5 @@
 const axios = require('axios');
+require('dotenv').config();
 
 const getWeatherData = async (lat, lon) => {
 
@@ -19,16 +20,16 @@ const getWeatherData = async (lat, lon) => {
 
 }
 
-// const getWeatherDataByDate = async (lat, lon, cnt) => {
-//     const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=${API_KEY}&units=metric`;
-//
-//     try {
-//         const response = await axios.get(url);
-//         return response.data.list;
-//     } catch (error) {
-//         console.error("Error fetching forecast data:", error.message);
-//         throw new Error("Failed to fetch forecast data");
-//     }
-// };
+const getWeatherDataByDate = async (lat, lon, cnt) => {
+    const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=${API_KEY}&units=metric`;
+
+    try {
+        const response = await axios.get(url);
+        return response.data.list;
+    } catch (error) {
+        console.error("Error fetching forecast data:", error.message);
+        throw new Error("Failed to fetch forecast data");
+    }
+};
 
 module.exports = { getWeatherData };

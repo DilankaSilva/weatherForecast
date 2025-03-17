@@ -10,6 +10,6 @@ const asyncHandler = (fn) => (req, res, next) => {
 router.post('/users', asyncHandler(userController.createUser));
 router.put('/users/:email/location', asyncHandler(userController.updateUserLocation));
 router.get('/users/:email/weather', asyncHandler(weatherController.getWeatherData));
-// router.get('/users/weather/:email', asyncHandler(weatherController.getWeatherByDate));
+router.get('/users/weather/:email', asyncHandler(weatherController.getWeatherByDate));
 
 module.exports = router;
