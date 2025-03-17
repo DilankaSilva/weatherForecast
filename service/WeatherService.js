@@ -31,4 +31,4 @@ const getWeatherData = async (lat, lon) => {
 //     }
 // };
 
-module.exports = { getWeatherData, getWeatherDataByDate };
+module.exports = { getWeatherData };
