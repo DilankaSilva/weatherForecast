@@ -23,7 +23,7 @@
 //
 // };
 
-const { pipeline } = require('transformers');
+const { pipeline } = require('jstransformer');
 
 // Function to generate weather description using GPT-2
 const generateWeatherDescription = async (weatherData) => {
