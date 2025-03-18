@@ -20,16 +20,23 @@ const getWeatherData = async (lat, lon) => {
 
 }
 
-const getWeatherDataByDate = async (lat, lon, cnt) => {
-    const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${cnt}&appid=${API_KEY}&units=metric`;
+const getWeatherDatadate = async (lat, lon, dt) => {
+    const API_KEY = process.env.API_KEY;
+    const url = `http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&dt=${dt}&appid=${API_key}&units=metric`;
 
     try {
         const response = await axios.get(url);
-        return response.data.list;
+        return {
+            temperature: response.data.current.temp,
+            description:response.data.current.weather[0].description,
+            humidity: response.data.current.humidity,
+            wind_speed: response.data.current.wind_speed,
+            main: response.data.current.weather[0].main
+        }
     } catch (error) {
-        console.error("Error fetching forecast data:", error.message);
-        throw new Error("Failed to fetch forecast data");
+        console.error("Error fetching weather data:", error.message);
+        throw new Error("Failed to fetch weather data");
     }
 };
 
-module.exports = { getWeatherData };
+module.exports = { getWeatherData, getWeatherDatadate };
