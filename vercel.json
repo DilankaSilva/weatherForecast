@@ -1,9 +1,21 @@
 {
   "version": 2,
   "builds": [
-    { "src": "app.js", "use": "@vercel/node" }
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "app.js" }
-  ]
+    {
+      "src": "/api/(.*)",
+      "dest": "app.js"
+    }
+  ],
+  "build": {
+    "env": {
+      "NODE_ENV": "production",
+      "NPM_FLAGS": "--legacy-peer-deps"
+    }
+  }
 }

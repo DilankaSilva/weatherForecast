@@ -39,9 +39,20 @@ exports.getWeatherByDate = async (req, res) => {
         
         const targetDate = new Date(date).setUTCHours(0, 0, 0, 0) / 1000;
         console.log(targetDate)
-        const weatherData = await getWeatherDatadate(user.location.latitude,user.location.longitude,targetDate);
-        res.status(200).json({ weatherData });
-
+        const weatherData = await getWeatherDatadate(user.location.latitude,user.location.longitude);
+        
+        const weatherForDate = weatherData.list.find(item => {
+            const itemDate = new Date(item.dt * 1000);
+            const itemMidnight = new Date(itemDate).setUTCHours(0, 0, 0, 0) / 1000;
+            
+            return itemMidnight === targetDate;
+        });
+        
+        if (!weatherForDate) {
+            return res.status(404).json({ message: "Weather data not available for the specified date" });
+        }
+        
+        res.status(200).json({ weatherData: weatherForDate });
 
     } catch (error) {
         console.error("Error fetching forecast data:", error);
